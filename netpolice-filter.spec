@@ -1,59 +1,66 @@
-Name: netpolice-filter
-Version: 1.01
-Release: 1%{?dist}
-Packager: CAIR <support@cair.ru>
+Name:	 	netpolice-filter
+Version:	2.0
+Release:	2
 
-Summary: url filter for c-icap server
-License: BSD
-Group: System/Servers
-Url: http://www.netpolice.ru/
+Summary:	url filter for c-icap server
+License:	BSD
+Group:		System/Servers
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Url:		http://www.netpolice.ru/
 
-Source0: %name-%version.tar.gz
-Patch: %name-%version-strlcpy.patch
-Patch1: %name-%version-eng-fix.patch
+Source0:	%{name}-%{version}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-{release}-buildroot
+BuildRequires:	gcc4.4-c++
+BuildRequires:	c-icap-devel
+BuildRequires:	libclamav-devel
+BuildRequires:	libmemcache-devel
+BuildRequires:	opendbx-devel
+BuildRequires: 	zlib-devel
 
-# Automatically added by buildreq on Thu Apr 09 2009
-BuildRequires: gcc-c++ >= 4.4 libc-icap-netpolice-devel libmemcache-devel opendbx-devel zlib-devel
+Requires(pre):	shadow-utils
 
-Requires(pre): shadow-utils
+Requires:	%{name} = %{version}-%{release}
+Requires:	opendbx
+Requires:	opendbx-sqlite3
 
-Requires: %name = %version-%release
-Requires: opendbx
-Requires: opendbx-sqlite3
+Provides:	c-icap-url-filter
 
 %description
-ICAP module for checking URL against blacklist
+ICAP module for checking URL against blacklist.
 
 %prep
 %setup -q
-%patch -p1
-%patch1 -p1
 
 %build
+libtoolize --copy --force
 aclocal
-autoconf  
+autoconf
 autoheader
-cp /usr/share/libtool/config/ltmain.sh ltmain.sh
-automake --add-missing --copy  
+automake --foreign --add-missing --copy
 cp INSTALL INSTALL.txt
 
-%configure cicapincdir=%_includedir/c_icap
+%configure cicapincdir=/usr/include/c_icap 
 make
 
 %install
-##make ROOT="$RPM_BUILD_ROOT" install
-%{__make} DESTDIR=%{buildroot} install
-mkdir -p %{buildroot}%{_libdir}/c_icap
-mv %{buildroot}%{_libdir}/%name/srv_url_filter.so %{buildroot}%{_libdir}/c_icap
-rm -rf %{buildroot}%{_libdir}/%name
+
+mkdir -p  %{buildroot}/etc
+%makeinstall_std CONFIGDIR=/etc
 
 %files
+%defattr(-,root,root)
 %doc AUTHORS README INSTALL.txt TODO
-%_libdir/c_icap/srv_url_filter.so
+%{_libdir}/c_icap/*.so
+%{_libdir}/c_icap/*.la
+%config(noreplace) %{_sysconfdir}/*.conf*
 
 %clean
 make clean
 rm -rf %{buildroot}
 
+%changelog
+* Fri Aug 26 2011 L.Butorina <l.butorina@cair.ru> 2
+- New test version netpolice 2.0 for Mandriva.
+
+* Fri Jul 29 2011 L.Butorina <l.butorina@cair.ru> 1
+- New test version netpolice 1.1 for Mandriva.

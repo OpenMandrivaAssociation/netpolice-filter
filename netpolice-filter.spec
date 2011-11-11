@@ -10,7 +10,7 @@ Url:		http://www.netpolice.ru/
 
 Source0:	%{name}-%{version}.tar.gz
 
-BuildRequires:	gcc4.6-c++
+BuildRequires:	gcc-c++
 BuildRequires:	c-icap-devel
 BuildRequires:	libclamav-devel
 BuildRequires:	libmemcache-devel

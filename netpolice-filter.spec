@@ -12,7 +12,6 @@ Source0:	%{name}-%{version}.tar.gz
 
 BuildRequires:	gcc-c++
 BuildRequires:	c-icap-devel
-BuildRequires:	libclamav-devel
 BuildRequires:	libmemcache-devel
 BuildRequires:	opendbx-devel
 BuildRequires: 	zlib-devel

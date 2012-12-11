@@ -1,11 +1,10 @@
 Name:	 	netpolice-filter
 Version:	2.0
-Release:	2
+Release:	3
 
 Summary:	url filter for c-icap server
 License:	BSD
 Group:		System/Servers
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Url:		http://www.netpolice.ru/
 
 Source0:	%{name}-%{version}.tar.gz
@@ -18,7 +17,6 @@ BuildRequires: 	zlib-devel
 
 Requires(pre):	shadow-utils
 
-Requires:	%{name} = %{version}-%{release}
 Requires:	opendbx
 Requires:	opendbx-sqlite3
 
@@ -47,19 +45,17 @@ mkdir -p  %{buildroot}/etc
 %makeinstall_std CONFIGDIR=/etc
 
 %files
-%defattr(-,root,root)
 %doc AUTHORS README INSTALL.txt TODO
 %{_libdir}/c_icap/*.so
-%{_libdir}/c_icap/*.la
 %config(noreplace) %{_sysconfdir}/*.conf*
 
-%clean
-make clean
-rm -rf %{buildroot}
+
 
 %changelog
-* Fri Aug 26 2011 L.Butorina <l.butorina@cair.ru> 2
-- New test version netpolice 2.0 for Mandriva.
+* Tue Dec 06 2011 Pischulin Anton <apischulin@mandriva.org> 2.0-2
++ Revision: 738268
+- update to 2.0
 
-* Fri Jul 29 2011 L.Butorina <l.butorina@cair.ru> 1
-- New test version netpolice 1.1 for Mandriva.
+  + Alex Burmashev <burmashev@mandriva.org>
+    - import netpolice-filter
+

@@ -1,6 +1,6 @@
 Name:	 	netpolice-filter
 Version:	2.0
-Release:	3
+Release:	4
 
 Summary:	url filter for c-icap server
 License:	BSD

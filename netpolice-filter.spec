@@ -5,7 +5,7 @@ Release:	4
 Summary:	url filter for c-icap server
 License:	BSD
 Group:		System/Servers
-Url:		http://www.netpolice.ru/
+Url:		https://www.netpolice.ru/
 
 Source0:	%{name}-%{version}.tar.gz
 

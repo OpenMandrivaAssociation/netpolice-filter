@@ -9,6 +9,11 @@ Url:		https://www.netpolice.ru/
 
 Source0:	%{name}-%{version}.tar.gz
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	gcc-c++
 BuildRequires:	c-icap-devel
 BuildRequires:	libmemcache-devel
